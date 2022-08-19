@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AnimalShelter.Models;
-
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 namespace AnimalShelter.Controllers
+
 {
   [Route("api/[controller]")]
   [ApiController]
@@ -50,6 +53,7 @@ namespace AnimalShelter.Controllers
     }
 
     //POST api/destinations
+  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPost]
     public async Task<ActionResult<Pet>> Post(Pet pet)
     {
